@@ -1,0 +1,102 @@
+---
+title: Getting Started
+description: Give your AI persistent memory in 5 minutes
+---
+
+# Getting Started with ekkOS
+
+Give your AI assistant persistent memory that works across sessions and tools.
+
+## What You Get
+
+- **Memory across sessions** - Your AI remembers context between conversations
+- **Learned solutions** - Problems you solve become reusable patterns
+- **Your preferences enforced** - Set MUST/NEVER/PREFER/AVOID rules that stick
+- **Works everywhere** - Same memory across Claude Code, Cursor, Windsurf, and more
+
+## Prerequisites
+
+- **Claude Code**, **Cursor**, or **Claude Desktop** installed
+- Node.js 18+ (check: `node --version`)
+
+## Quick Start
+
+### Option A: VS Code Extension (Recommended)
+
+1. Install [ekkOS Connect](https://marketplace.visualstudio.com/items?itemName=ekkostech.ekkos-connect) from the VS Code Marketplace
+2. Click the ekkOS icon in the sidebar
+3. Sign in with your ekkOS account
+4. Click "Setup All"
+
+The extension automatically configures Claude Code, Cursor, Windsurf, and Claude Desktop.
+
+### Option B: Manual Configuration
+
+1. Get your API key from [platform.ekkos.dev](https://platform.ekkos.dev)
+2. Follow the [Setup Guide](/docs/mcp-integration) for your specific tool
+
+## Test Your Setup
+
+In your AI assistant, try:
+
+```
+Search my memory for recent patterns
+```
+
+If ekkOS is connected, you'll see it use the `ekkOS_Search` tool.
+
+## Create Your First Memory
+
+Ask your AI:
+
+```
+I want to remember: Always use TypeScript strict mode in this project.
+```
+
+Your AI saves this as a directive. In future conversations, it will follow this rule.
+
+## What Happens Automatically
+
+As you work with your AI:
+
+| What You Do | What ekkOS Does |
+|-------------|-----------------|
+| Solve a problem | Captures the solution for reuse |
+| Say "always" or "never" | Saves it as a directive |
+| Fix a bug | Remembers the fix |
+| Get corrected | Updates its knowledge |
+
+## Common Commands
+
+Try these with your AI:
+
+- "What did we discuss yesterday?" - Recall past conversations
+- "How many patterns do I have?" - View your memory stats
+- "Store my API key for GitHub" - Securely save credentials
+- "Create a plan for implementing authentication" - Structure complex tasks
+
+## Troubleshooting
+
+### MCP Server Not Connecting
+
+```bash
+# Test connectivity
+curl https://mcp.ekkos.dev/api/v1/health
+# Should return: {"status":"ok","healthy":true}
+```
+
+### Tools Not Appearing
+
+1. Restart your AI assistant after configuration changes
+2. Verify your API key at [platform.ekkos.dev](https://platform.ekkos.dev)
+3. Check your config file syntax (must be valid JSON)
+
+## Next Steps
+
+- [Setup Guide](/docs/mcp-integration) - Detailed configuration for each tool
+- [Tools Reference](/docs/tools-reference) - All 68 MCP tools explained
+- [How ekkOS Works](/docs/architecture) - Understand the system
+
+---
+
+*Need help? support@ekkos.dev*

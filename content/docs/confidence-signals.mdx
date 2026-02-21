@@ -1,0 +1,108 @@
+---
+title: Confidence Signals
+description: Understand validation states for AI suggestions
+---
+
+# Confidence Signals™
+
+Confidence Signals help you understand how well an AI suggestion aligns with your memory before you implement it.
+
+## What It Does
+
+When you receive a suggestion from your AI, ekkOS can check it against your stored patterns, directives, and past decisions. The result is a confidence signal that tells you:
+
+- Does this match your past experience?
+- Does this conflict with your rules?
+- Is this something you've never encountered?
+
+## The Three States
+
+### Grounded ✅
+
+The suggestion has supporting evidence in your memory.
+
+**What this means:**
+- Patterns exist that support this approach
+- Past successful solutions align with this
+- Your directives allow or encourage this
+
+**How to interpret:** Higher confidence. The suggestion matches what has worked for you before.
+
+---
+
+### Speculative ⚠️
+
+The suggestion has limited or no evidence in your memory.
+
+**What this means:**
+- No matching patterns found
+- No relevant past conversations
+- Neither confirmed nor contradicted by your memory
+
+**How to interpret:** Neutral confidence. This may be valid, but you have no memory to support it. Proceed with normal caution.
+
+---
+
+### Conflicts ❌
+
+The suggestion contradicts something in your memory.
+
+**What this means:**
+- A directive explicitly forbids this (NEVER rules)
+- Past patterns indicate this approach failed
+- This contradicts your stated preferences
+
+**How to interpret:** Lower confidence. Review the conflicts before implementing.
+
+---
+
+## Using the ekkOS_Conflict Tool
+
+Your AI can check suggestions before acting:
+
+```
+Check if using localStorage for tokens conflicts with my rules
+```
+
+This invokes `ekkOS_Conflict` and returns any matching directives or patterns that would be violated.
+
+## Limitations
+
+**Confidence Signals do not guarantee correctness.** They reflect alignment with your memory, not objective truth.
+
+- **Grounded** doesn't mean "definitely correct"—it means it matches your past experience
+- **Speculative** doesn't mean "wrong"—it means you have no prior data
+- **Conflicts** may be intentional—you might be trying something new
+
+The value is in surfacing relevant context, not in making decisions for you.
+
+## When to Use
+
+Confidence Signals are most valuable for:
+
+- **Architectural decisions** - Does this match how we've built things before?
+- **Technology choices** - Have we used this successfully in the past?
+- **Configuration changes** - Does this violate any rules we've set?
+- **Destructive operations** - Does this conflict with our safety directives?
+
+## Setting Up Rules
+
+To make Confidence Signals more useful, set directives:
+
+```
+I never want to use var in TypeScript
+```
+
+This creates a NEVER directive. Future suggestions using `var` will show a conflict.
+
+```
+I prefer Tailwind over CSS modules
+```
+
+This creates a PREFER directive. Suggestions using CSS modules will be flagged as potentially conflicting with preferences.
+
+## Next Steps
+
+- [Tools Reference](/docs/tools-reference) - See ekkOS_Conflict and ekkOS_Directive
+- [Setup Guide](/docs/mcp-integration) - Get started with ekkOS
+- [How ekkOS Works](/docs/architecture) - Understand the memory system

@@ -1,0 +1,407 @@
+---
+title: Tools Reference
+description: Complete documentation for all 68 ekkOS MCP tools
+---
+
+# Tools Reference
+
+ekkOS provides 68 MCP tools organized into functional categories. Your AI assistant calls these tools automatically based on context.
+
+---
+
+## Memory & Search
+
+### ekkOS_Search
+
+Search across all memory layers for relevant patterns, solutions, and context.
+
+**When to use:** Before answering technical questions, when looking for past solutions, or when context would help.
+
+**Input:** Search query, optional layer filters, result limit
+**Output:** Matching patterns, episodes, and context with relevance scores
+
+**Example:** "Search my memory for authentication patterns"
+
+---
+
+### ekkOS_Context
+
+Get relevant context for a specific task, combining patterns, recent episodes, and active plans.
+
+**When to use:** Starting a new task where past context would help.
+
+**Input:** Task description
+**Output:** Relevant patterns, recent related conversations, applicable plans
+
+**Example:** "Get context for implementing user registration"
+
+---
+
+### ekkOS_Recall
+
+Retrieve conversations from a specific time period.
+
+**When to use:** When you need to remember what was discussed previously.
+
+**Input:** Time range (days ago, or specific dates)
+**Output:** Conversation summaries from that period
+
+**Example:** "What did we discuss yesterday?" or "Recall conversations from last week"
+
+---
+
+### ekkOS_Codebase
+
+Search your project's codebase for relevant code patterns and files.
+
+**When to use:** Finding existing implementations, understanding project structure.
+
+**Input:** Search query, optional file type filters
+**Output:** Matching code snippets and file locations
+
+**Example:** "Find authentication handlers in my codebase"
+
+---
+
+## Learning & Patterns
+
+### ekkOS_Forge
+
+Create a new pattern from a solution you've discovered or a problem you've solved.
+
+**When to use:** After fixing a bug, finding a better approach, or solving a non-obvious problem.
+
+**Input:** Pattern title, problem description, solution, optional tags
+**Output:** Created pattern ID and confirmation
+
+**Example:** "Remember that we fixed the CORS issue by adding middleware"
+
+---
+
+### ekkOS_Capture
+
+Record an event or piece of context to memory.
+
+**When to use:** Logging significant actions, code changes, or decisions.
+
+**Input:** Event type, content, metadata
+**Output:** Captured event confirmation
+
+**Example:** Typically called automatically by integrations.
+
+---
+
+### ekkOS_Track
+
+Record that specific patterns were applied during a task.
+
+**When to use:** When explicitly using patterns from memory.
+
+**Input:** Pattern IDs, context of application
+**Output:** Application tracking confirmation
+
+**Example:** Typically called automatically when patterns are used.
+
+---
+
+### ekkOS_Outcome
+
+Report whether a pattern application succeeded or failed.
+
+**When to use:** After applying a pattern, to track its effectiveness.
+
+**Input:** Success/failure, optional context
+**Output:** Outcome recorded confirmation
+
+**Example:** "That authentication pattern worked" or "That approach failed"
+
+---
+
+### ekkOS_Detect
+
+Automatically detect which patterns were used based on response content.
+
+**When to use:** After completing a task, to track pattern usage automatically.
+
+**Input:** Response text, original query
+**Output:** Detected pattern IDs and confidence scores
+
+**Example:** Typically called automatically by hooks.
+
+---
+
+## Directives
+
+### ekkOS_Directive
+
+Create a rule that your AI should follow (MUST/NEVER/PREFER/AVOID).
+
+**When to use:** When you state a preference or constraint you want enforced.
+
+**Input:** Directive type (MUST/NEVER/PREFER/AVOID), rule text, optional scope
+**Output:** Created directive confirmation
+
+**Example:** "Always use TypeScript strict mode" → MUST directive
+
+---
+
+### ekkOS_Conflict
+
+Check if a proposed action conflicts with your directives or patterns.
+
+**When to use:** Before destructive operations, deployments, or significant changes.
+
+**Input:** Proposed action description, optional scope
+**Output:** Conflict status, any matching directives or patterns that conflict
+
+**Example:** "Check if deleting these files violates any rules"
+
+---
+
+## Plans & Tasks
+
+### ekkOS_Plan
+
+Create a structured plan with steps for a complex task.
+
+**When to use:** Breaking down multi-step implementations or complex features.
+
+**Input:** Plan title, array of steps with labels and descriptions
+**Output:** Created plan ID
+
+**Example:** "Create a plan for implementing OAuth login"
+
+---
+
+### ekkOS_Plans
+
+List your active and completed plans.
+
+**When to use:** Reviewing current work, finding existing plans.
+
+**Input:** Optional status filter, pagination
+**Output:** List of plans with status and progress
+
+**Example:** "Show my current plans"
+
+---
+
+### ekkOS_PlanStatus
+
+Update the status of a plan (draft, in_progress, completed, archived).
+
+**When to use:** Moving a plan through its lifecycle.
+
+**Input:** Plan ID, new status
+**Output:** Updated plan confirmation
+
+**Example:** "Mark this plan as completed"
+
+---
+
+### ekkOS_PlanStep
+
+Mark a specific step in a plan as complete or incomplete.
+
+**When to use:** Tracking progress through a plan.
+
+**Input:** Plan ID, step index, completion status
+**Output:** Updated step confirmation
+
+**Example:** "Mark step 2 as done"
+
+---
+
+### ekkOS_Generate
+
+Generate a plan using AI based on context and relevant patterns.
+
+**When to use:** When you want AI to suggest a structured approach.
+
+**Input:** Task context, optional patterns to consider
+**Output:** Generated plan with suggested steps
+
+**Example:** "Generate a plan for refactoring the auth module"
+
+---
+
+### ekkOS_SaveTemplate
+
+Save an existing plan as a reusable template.
+
+**When to use:** When a plan structure would be useful for future similar tasks.
+
+**Input:** Plan ID, template category
+**Output:** Saved template confirmation
+
+**Example:** "Save this plan as a template for API implementations"
+
+---
+
+### ekkOS_Templates
+
+List available plan templates.
+
+**When to use:** Finding reusable plan structures.
+
+**Input:** Optional category filter
+**Output:** List of available templates
+
+**Example:** "Show me available plan templates"
+
+---
+
+### ekkOS_FromTemplate
+
+Create a new plan from an existing template.
+
+**When to use:** Starting a new task with a proven structure.
+
+**Input:** Template ID, context for the new plan
+**Output:** Created plan from template
+
+**Example:** "Use the API template for this new endpoint"
+
+---
+
+## Secrets Management
+
+### ekkOS_StoreSecret
+
+Securely store an API key, password, or other credential.
+
+**When to use:** When you share a credential that should be remembered securely.
+
+**Input:** Service name, secret value, optional type and description
+**Output:** Stored secret confirmation (value is encrypted)
+
+**Example:** "Store my OpenAI API key"
+
+---
+
+### ekkOS_GetSecret
+
+Retrieve a stored credential.
+
+**When to use:** When you need a previously stored credential.
+
+**Input:** Service name, optional type
+**Output:** Decrypted secret value (or masked version)
+
+**Example:** "Get my GitHub token"
+
+---
+
+### ekkOS_ListSecrets
+
+List all stored secrets (metadata only, no values).
+
+**When to use:** Seeing what credentials are stored.
+
+**Input:** None
+**Output:** List of secrets with service names, types, and creation dates
+
+**Example:** "What API keys do I have stored?"
+
+---
+
+### ekkOS_DeleteSecret
+
+Permanently delete a stored secret.
+
+**When to use:** Removing credentials you no longer need.
+
+**Input:** Secret ID
+**Output:** Deletion confirmation
+
+**Example:** "Delete my old Stripe API key"
+
+---
+
+### ekkOS_RotateSecret
+
+Update a secret with a new value while maintaining metadata.
+
+**When to use:** Rotating credentials.
+
+**Input:** Service name, new value
+**Output:** Rotation confirmation
+
+**Example:** "Update my AWS access key"
+
+---
+
+## Analytics & Reflection
+
+### ekkOS_Stats
+
+Get statistics about your memory usage and pattern effectiveness.
+
+**When to use:** Understanding your memory health and usage.
+
+**Input:** None
+**Output:** Pattern counts, success rates, layer statistics
+
+**Example:** "How many patterns do I have?"
+
+---
+
+### ekkOS_Summary
+
+Get a human-readable summary of recent ekkOS activity.
+
+**When to use:** Understanding what ekkOS has been doing.
+
+**Input:** Optional time window
+**Output:** Summary of searches, pattern applications, captures
+
+**Example:** "What has ekkOS done in this session?"
+
+---
+
+### ekkOS_Reflect
+
+Analyze a response for improvement opportunities.
+
+**When to use:** After completing a task, for continuous improvement.
+
+**Input:** Response text, original query, context
+**Output:** Suggestions for pattern improvements, better approaches
+
+**Example:** Typically called automatically for reflection.
+
+---
+
+## Portability
+
+### ekkOS_Export
+
+Export all your patterns, directives, and plans as portable JSON.
+
+**When to use:** Backup, migration, or analysis.
+
+**Input:** Optional filters for what to include
+**Output:** JSON backup of your memory data
+
+**Example:** "Export all my patterns"
+
+---
+
+### ekkOS_Import
+
+Import memory data from a previously exported backup.
+
+**When to use:** Restoring from backup or migrating data.
+
+**Input:** Exported data object, merge strategy
+**Output:** Import results with counts
+
+**Example:** "Import my backup"
+
+---
+
+## Next Steps
+
+- [Confidence Signals](/docs/confidence-signals) - Understanding validation states
+- [Setup Guide](/docs/mcp-integration) - Configuration details
+- [How ekkOS Works](/docs/architecture) - System overview

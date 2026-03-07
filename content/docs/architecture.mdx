@@ -1,0 +1,93 @@
+---
+title: How ekkOS Works
+description: Cloud-based persistent memory for AI assistants
+---
+
+# How ekkOS Works
+
+ekkOS provides persistent memory for AI coding assistants. Your AI remembers context, learns from experience, and respects your preferences across sessions.
+
+## The Problem
+
+AI assistants forget everything between sessions. Every conversation starts fresh:
+- Re-explaining your codebase
+- Repeating the same mistakes
+- Ignoring your stated preferences
+
+## The Solution
+
+ekkOS gives your AI persistent memory stored in the cloud. It works with any MCP-compatible tool (Claude Code, Cursor, Windsurf, etc.) and syncs across all of them.
+
+## Cloud-Based Architecture
+
+ekkOS is entirely cloud-based:
+
+- **No local storage** - All memory lives in ekkOS servers
+- **No local processing** - Pattern matching and retrieval happen server-side
+- **Portable** - Your memory follows you across machines and tools
+- **Secure** - Data encrypted at rest and in transit
+
+The MCP server you install is a thin proxy that forwards requests to `mcp.ekkos.dev`.
+
+## What Gets Remembered
+
+### Patterns
+Solutions that worked. When you solve a problem, ekkOS can capture it as a reusable pattern. Next time a similar problem arises, that solution is available.
+
+### Directives
+Your rules. When you say "always use TypeScript strict mode" or "never use the any type," these become directives your AI follows in future sessions.
+
+### Conversations
+Past context. You can recall what you discussed yesterday, last week, or whenever.
+
+### Secrets
+Credentials you store. API keys, tokens, and passwords are encrypted and available when needed.
+
+## Memory Layers
+
+ekkOS organizes memory into 11 layers:
+
+| Layer | What It Stores |
+|-------|---------------|
+| Working | Current session context |
+| Episodic | Past conversations |
+| Semantic | Knowledge embeddings |
+| Patterns | Proven solutions |
+| Procedural | Step-by-step guides |
+| Collective | Cross-user validated patterns |
+| Meta | Pattern effectiveness data |
+| Codebase | Project-specific context |
+| Directives | Your MUST/NEVER/PREFER/AVOID rules |
+| Conflict | Resolution data |
+| Secrets | Encrypted credentials |
+
+You don't interact with layers directly. The 68 MCP tools handle retrieval and storage automatically.
+
+## How Learning Works
+
+1. **You work normally** - Use your AI as usual
+2. **Solutions are captured** - When you solve problems, they can become patterns
+3. **Outcomes are tracked** - ekkOS notes what worked and what didn't
+4. **Relevant memory surfaces** - Future queries find applicable past knowledge
+
+This happens through the tools your AI calls, not through hidden background processing.
+
+## What You Control
+
+- **What gets saved** - You decide when to forge patterns or set directives
+- **What gets retrieved** - Your AI searches memory when relevant
+- **What gets deleted** - You can remove patterns, directives, or secrets
+- **Who sees what** - Your memory is private to your account
+
+## Limitations
+
+- Memory requires your AI to actively use ekkOS tools
+- Pattern quality depends on what you choose to save
+- Retrieval finds relevant matches, not perfect ones
+- You start with zero patterns and build over time
+
+## Next Steps
+
+- [Tools Reference](/docs/tools-reference) - All 68 MCP tools
+- [Confidence Signals](/docs/confidence-signals) - Validation states
+- [Setup Guide](/docs/mcp-integration) - Configuration details

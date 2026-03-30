@@ -1,0 +1,243 @@
+---
+title: Setup Guide
+description: Configure ekkOS for Claude Code, Cursor, Windsurf, and more
+---
+
+# ekkOS Setup Guide
+
+Connect ekkOS memory to your AI assistant via MCP (Model Context Protocol).
+
+## Recommended MCP entry: `@ekkos/cli`
+
+Memory tools run through the **ekkOS CLI** package. Use the **`mcp` subcommand** so your IDE runs the same stdio server as `ekkos mcp` locally:
+
+```json
+"args": ["-y", "@ekkos/cli@latest", "mcp"]
+```
+
+After a global install (`npm install -g @ekkos/cli`), you can also use `command` / `args` pointing at `ekkos` and `["mcp"]` if you prefer.
+
+### Legacy `@ekkos/mcp-server` (deprecated)
+
+The standalone **`@ekkos/mcp-server`** package is **deprecated**. It remains a thin **shim** that forwards to `@ekkos/cli` for old configs, but **do not** use it in new setups. Migrate any existing config from:
+
+```json
+"args": ["-y", "@ekkos/mcp-server"]
+```
+
+to:
+
+```json
+"args": ["-y", "@ekkos/cli@latest", "mcp"]
+```
+
+---
+
+## Quick Setup (Recommended)
+
+Install the **ekkOS Connect** VS Code extension for automatic configuration:
+
+1. Open VS Code or Cursor
+2. Go to Extensions (Cmd/Ctrl + Shift + X)
+3. Search for `ekkOS Connect`
+4. Install and sign in
+5. Click "Setup All"
+
+The extension configures all supported tools automatically.
+
+---
+
+## Manual Setup
+
+### 1. Get Your API Key
+
+1. Visit [platform.ekkos.dev](https://platform.ekkos.dev)
+2. Sign in or create an account
+3. Go to Settings → API Keys
+4. Generate a new key
+
+### 2. Configure Your Tool
+
+#### Claude Code
+
+Add to `~/.claude/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "ekkos-memory": {
+      "command": "npx",
+      "args": ["-y", "@ekkos/cli@latest", "mcp"],
+      "env": {
+        "EKKOS_API_KEY": "ekk_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+Or add to your project's `.mcp.json` for project-specific configuration.
+
+#### Cursor
+
+Create `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "ekkos-memory": {
+      "command": "npx",
+      "args": ["-y", "@ekkos/cli@latest", "mcp"],
+      "env": {
+        "EKKOS_API_KEY": "ekk_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+#### Windsurf
+
+Create `~/.codeium/windsurf/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ekkos-memory": {
+      "command": "npx",
+      "args": ["-y", "@ekkos/cli@latest", "mcp"],
+      "env": {
+        "EKKOS_API_KEY": "ekk_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+#### Claude Desktop
+
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or equivalent on Windows/Linux:
+
+```json
+{
+  "mcpServers": {
+    "ekkos-memory": {
+      "command": "npx",
+      "args": ["-y", "@ekkos/cli@latest", "mcp"],
+      "env": {
+        "EKKOS_API_KEY": "ekk_your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+### 3. Restart Your Tool
+
+Close and reopen your AI assistant. The MCP server loads on startup.
+
+---
+
+## Verify Installation
+
+### Test Connection
+
+```bash
+curl https://mcp.ekkos.dev/api/v1/health
+```
+
+Expected response:
+```json
+{"status":"ok","healthy":true}
+```
+
+### Test Authentication
+
+```bash
+curl https://mcp.ekkos.dev/api/v1/mcp/tools \
+  -H "Authorization: Bearer ekk_your_api_key_here"
+```
+
+Should return a list of available tools.
+
+### Test in Your AI
+
+Ask your AI assistant:
+
+```
+Search my memory for patterns
+```
+
+If working, you'll see it invoke the `ekkOS_Search` tool.
+
+---
+
+## What Your AI Can Do
+
+Once connected, your AI gains memory tools organized into categories:
+
+### Memory & Search
+- Search across all memory layers
+- Recall past conversations by time
+- Get context for current tasks
+
+### Learning & Patterns
+- Save solutions as reusable patterns
+- Track pattern outcomes (success/failure)
+- Set directives (MUST/NEVER/PREFER/AVOID)
+
+### Plans & Tasks
+- Create structured implementation plans
+- Track progress through steps
+- Save and reuse plan templates
+
+### Secrets Management
+- Securely store API keys and credentials
+- Retrieve stored secrets when needed
+- Rotate and delete secrets
+
+### Validation
+- Check proposed actions against your rules
+- Get confidence signals on suggestions
+
+See [Tools Reference](/docs/tools-reference) for complete documentation.
+
+---
+
+## Troubleshooting
+
+### "MCP server not found"
+
+1. Ensure Node.js 18+ is installed: `node --version`
+2. Test npx works: `npx --version`
+3. Try running manually:
+   ```bash
+   EKKOS_API_KEY=your_key npx -y @ekkos/cli@latest mcp
+   ```
+
+### "Unauthorized" or "Invalid API key"
+
+1. Check your key at [platform.ekkos.dev](https://platform.ekkos.dev)
+2. Ensure no extra whitespace in your config
+3. Verify the key hasn't been revoked
+
+### Tools Not Appearing
+
+1. **Restart required** - Close and reopen your AI assistant completely
+2. Check config file location and JSON syntax
+3. Look for MCP connection errors in your tool's logs
+
+### Connection Timeouts
+
+ekkOS is cloud-based. Check:
+1. Internet connectivity
+2. Firewall/proxy settings
+3. API status at [status.ekkos.dev](https://status.ekkos.dev)
+
+---
+
+## Next Steps
+
+- [Tools Reference](/docs/tools-reference) - MCP tools explained
+- [Confidence Signals](/docs/confidence-signals) - Understand validation states
+- [Getting Started](/docs) - Quick start guide

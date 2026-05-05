@@ -1,0 +1,24 @@
+# ekkOS Documentation
+
+> Complete technical documentation for ekkOS — the intelligence layer for AI development.
+
+## What This Site Contains
+
+This is the official documentation for ekkOS, covering setup, configuration, MCP tools, memory architecture, the Golden Loop, and integration guides.
+
+## Key Documentation Sections
+
+- **Getting Started**: Installation, first setup, connecting to Claude Code or other MCP clients.
+- **Memory Architecture**: 10-layer memory system — working, episodic, semantic, pattern, meta, collective, procedural, codebase, directive, and dream layers.
+- **MCP Tools Reference**: Complete reference for all 70+ MCP tools including ekkOS_Search, ekkOS_Forge, ekkOS_Track, ekkOS_Outcome, ekkOS_Directive, and more.
+- **Golden Loop**: How patterns are forged, applied, tracked, and refined over time.
+- **Proxy Configuration**: Setting up the transparent proxy that enriches AI conversations.
+- **Directive System**: Creating MUST/NEVER/PREFER/AVOID rules that persist across sessions.
+- **Pattern Forging**: How to capture reusable solutions from bug fixes and learnings.
+- **Dream Forge**: Overnight memory consolidation and pattern strengthening.
+
+## Links
+
+- Main site: https://ekkos.dev
+- Documentation: https://docs.ekkos.dev
+- API Reference: https://docs.ekkos.dev/api
